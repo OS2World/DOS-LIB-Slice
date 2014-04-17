@@ -1,0 +1,44 @@
+SLICE.ASM
+
+Provides a generic time slicing function for all DOS multi-taskers I
+know or care about.
+
+Note that this library is Turbo Assembler specific, since I have long
+since weaned myself from MASM's brain-dead memory addressing syntax.
+
+This library is designed to be easily extended; for each new
+multi-tasker supported, you need to write a detect routine and a
+time-slice routine.
+
+Your detection function will take no input, and should return with
+carry set if the associated multi-tasker is detected. This routine
+may safely alter register AX. No other registers should be altered.
+
+The time-slice routine will take no input and give up a "standard"
+timeslice for the associated multi-tasker. This routine may safely
+alter registers AX, BX and DS. No other registers should be altered.
+
+Once you have such routines written, add their addresses to the
+arrays detect_func and slice_func below. Increment the
+NumMultitaskers equate, and you're done.
+
+This library placed in the public domain by Kevin Vigor, 1/5/93.
+I would, however, appreciate it if you do the following two things:
+
+ 1: If you distribute an altered version of this source, please add to
+    this header a log of your changes;
+
+ 2: If you discover any bugs or extend this library, please send a copy
+    of your changes to me at one of the below addresses:
+
+         Compuserve: 72500,3705
+         Internet:   kevin@elvis.wicat.com (preferred address)
+                     72500.3705@compuserve.com
+
+Changes:
+
+3/7/93, Kevin Vigor:
+NEAR function over-rides added to allow use of LARGE and HUGE models.
+
+10/17/93, Kevin Vigor:
+Support for OS/2 2.1 added. Thanks to Kurt Westerfield and Peter Fitzsimmons.
